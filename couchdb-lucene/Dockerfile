@@ -18,6 +18,8 @@ RUN cd /opt \
 
 
 RUN adduser --system --disabled-password --home /opt/dist/couchdb-lucene-$CDB_LUCENE_VER --no-create-home --shell=/bin/bash --group --gecos "" couchdb 
+
+COPY ./docker-entrypoint.sh /opt/docker-entrypoint.sh
 	
 RUN sed -e 's/^host=localhost$/host=0.0.0.0/' -i /opt/dist/couchdb-lucene-$CDB_LUCENE_VER/conf/couchdb-lucene.ini
 RUN sed -e 's/localhost:5984/couchdb:5984/' -i /opt/dist/couchdb-lucene-$CDB_LUCENE_VER/conf/couchdb-lucene.ini
@@ -28,4 +30,4 @@ WORKDIR /opt/dist/couchdb-lucene-$CDB_LUCENE_VER
 
 EXPOSE 5985
 
-ENTRYPOINT ["/opt/dist/couchdb-lucene-$CDB_LUCENE_VER/bin/run"]
+ENTRYPOINT ["/opt/docker-entrypoint.sh"]
