@@ -20,8 +20,7 @@ RUN adduser --system --disabled-password --home /opt/dist/couchdb-lucene-$CDB_LU
 
 COPY ./docker-entrypoint.sh /opt/docker-entrypoint.sh
 	
-RUN sed -e 's/^host=localhost$/host=0.0.0.0/' -i /opt/dist/couchdb-lucene-$CDB_LUCENE_VER/conf/couchdb-lucene.ini \
-	&& sed -e 's/localhost:5984/couchdb:5984/' -i /opt/dist/couchdb-lucene-$CDB_LUCENE_VER/conf/couchdb-lucene.ini
+RUN sed -e 's/^host=localhost$/host=0.0.0.0/' -i /opt/dist/couchdb-lucene-$CDB_LUCENE_VER/conf/couchdb-lucene.ini
 
 RUN chmod +x /opt/docker-entrypoint.sh \	
 	&& chown -R couchdb:couchdb /opt/dist/couchdb-lucene-$CDB_LUCENE_VER
@@ -29,5 +28,7 @@ RUN chmod +x /opt/docker-entrypoint.sh \
 WORKDIR /opt/dist/couchdb-lucene-$CDB_LUCENE_VER
 
 EXPOSE 5985
+
+ENV CDB_AUTH=""
 
 CMD ["/opt/docker-entrypoint.sh"]
