@@ -16,7 +16,9 @@ RUN \
   mv /src/profiles/lib/ lib && \
   rm -rf /src
 
-RUN mkdir -p /opt/osrm/etc /opt/osrm/bin
+RUN \
+	mkdir -p /opt/osrm/etc /opt/osrm/bin && \
+	cp -r /build/lib/ /opt/osrm/bin/
 
 ADD sources/ /opt/osrm/bin/
 
