@@ -16,11 +16,16 @@ RUN \
   mv /src/profiles/lib/ lib && \
   rm -rf /src
 
-RUN \
-	mkdir -p /opt/osrm/etc /opt/osrm/bin && \
-	cp -r /build/lib/ /opt/osrm/bin/
+RUN mkdir -p /opt/osrm/etc /opt/osrm/bin
 
 ADD sources/ /opt/osrm/bin/
+
+RUN	\
+	cp -r /build/lib/ /opt/osrm/bin/ && \
+	cd /opt/osrm/bin && \
+	chmod 755 boot && \
+	chmod 755 build
+
 
 VOLUME ["/opt/osrm/data", "opt/osrm/etc", "opt/osrm/stxxl", "opt/osrm/profiles"]
 
