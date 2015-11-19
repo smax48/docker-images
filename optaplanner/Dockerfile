@@ -3,12 +3,10 @@ FROM java:8
 RUN \
         mkdir -p /opt/lib && \
         cd /opt/lib && \
-        wget https://bitbucket.org/anigo/route_planner_docker/downloads/optaplanner_tsp_jar.zip && \
-        wget https://bitbucket.org/anigo/route_planner_docker/downloads/optaplanner-tsp.jar && \
-        unzip optaplanner_tsp_jar.zip && \
-        mv -f optaplanner-tsp.jar optaplanner_tsp_jar/
+        wget https://fastroutedata.blob.core.windows.net/optaplanner/optaplanner-tsp-1.0-rel.zip && \
+        unzip optaplanner-tsp-1.0-rel.zip 
 
-WORKDIR /opt/lib/optaplanner_tsp_jar
+WORKDIR /opt/lib/optaplanner-tsp-1.0
 
 ENV TSP_SAS_KEY=""
 ENV TSP_SB_NS="sb://routing.servicebus.windows.net/"
